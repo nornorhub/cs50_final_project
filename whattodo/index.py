@@ -26,8 +26,8 @@ def index():
 
         else:
             db.execute(
-                'UPDATE lists SET list = ?', 
-                (json.dumps(request.json),)
+                'UPDATE lists SET list = ? WHERE owner_id = ?', 
+                (json.dumps(request.json), session["user_id"])
             )
 
         db.commit()
