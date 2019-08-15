@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %} Lists {% endblock %}
+
+{% block nav %} <li><a href="{{ url_for('auth.logout') }}">Log out</a></li> {% endblock %}
+
+{% block body %}
+
+    <button id="CreateItem" type="button" class="btn btn-primary mb-3">Create Item</button>
+    <button id="SaveList" type="button" class="btn btn-success mb-3">Save List</button>
+    <ul id="List" class="list-group">
+        {% for todo in todoList %}
+            <li style='list-style-type:none'>
+
+                <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text bg-primary">
+                                <input type="checkbox" aria-label="Checkbox for following text input" {% if todo["checked"] %} checked {% endif %}>
+                            </div>
+                        </div>
+                        <input value='{{ todo["todo"] }}' type="text" class="form-control" aria-label="Text input with checkbox">
+                        <div class="input-group-append">
+                            <button class="btn btn-danger" type="button" id="button-addon2">Delete Item</button>
+                        </div>
+                </div>
+
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
