@@ -1,9 +1,15 @@
+# Database actions
+
+
+# Imports
 import sqlite3
 import click
 
 from flask import current_app, g
 from flask.cli import with_appcontext
 
+
+# Connects to the databse
 def get_db():
     if "db" not in g:
         g.db = sqlite3.connect(
@@ -15,6 +21,7 @@ def get_db():
     return g.db
 
 
+# Closes database connection
 def close_db(e=None):
     db = g.pop("db", None)
 
@@ -22,6 +29,7 @@ def close_db(e=None):
         db.close()
 
 
+# Creates the database structure
 def init_db():
     db = get_db()
 
@@ -29,6 +37,8 @@ def init_db():
         db.executescript(f.read().decode("utf8"))
 
 
+
+# Creates a command for initializing the database
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
@@ -36,6 +46,8 @@ def init_db_command():
     click.echo("Initialized Database.")
 
 
+# Makes sure that the database connection is closed at the end of each request
+# Identifies the database initializing command to flask
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)

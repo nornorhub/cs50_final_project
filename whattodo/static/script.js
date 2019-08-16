@@ -1,3 +1,5 @@
+
+// Creates an item in the list
 $('#CreateItem').click(() => {
     $('#List').append(`
     
@@ -21,12 +23,15 @@ $('#CreateItem').click(() => {
 })
 
 
+// Deletes an item
 $(document).on('click', '.btn-danger', (e) => {
     let listItem = e.target.parentNode.parentNode.parentNode
     listItem.innerHTML = ''
     listItem.parentNode.removeChild(listItem)
 })
 
+
+// Saves the list and validates list items' values
 $("#SaveList").click(() => {
 
     let todoList = document.querySelectorAll('.input-group')
