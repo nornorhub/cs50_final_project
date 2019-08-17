@@ -30,6 +30,27 @@ $(document).on('click', '.btn-danger', (e) => {
     listItem.parentNode.removeChild(listItem)
 })
 
+// Displays help alert
+$('.btn-info').click((e) => {
+    e.target.parentNode.remove()
+    $('.container').prepend(`
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>WhatToDo?!</strong> This is an app to tell you what to do..
+            <hr>
+            <p>
+                You create items, each item is something that you want to do sooner or later.
+                After you finish doing an item, you check the checkbox on the left of the item.
+                If you want to discard an item, you can press the "Delete Item" button on
+                the specified item. Lastly, <strong>DO NOT</strong> forget to save your list or everything you've done will
+                be lost.
+            </p>
+
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    `)
+})
 
 // Saves the list and validates list items' values
 $("#SaveList").click(() => {
